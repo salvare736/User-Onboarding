@@ -33,21 +33,58 @@ export default function App() {
   const [formErrors, setFormErrors] = useState(initialFormErrors);
   const [disabled, setDisabled] = useState(initialDisabled);
 
-  const getUsers = () => {
-
-  };
-
   const postNewUser = (newUser) => {
-
+    axios
+      .post('https://reqres.in/api/users', newUser)
+      .then((res) => {
+        console.log(res.data);
+        setUsers([res.data, ...users]);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setFormValues(initialFormValues);
+      });
   };
 
   const inputChange = (name, value) => {
-
+    yup
+      .reach(schema, name)
+      .validate(value)
+      .then(() => {
+        setFormErrors({
+          ...formErrors,
+          [name]: '',
+        });
+      })
+      .catch((err) => {
+        setFormErrors({
+          ...formErrors,
+          [name]: err.errors[0]
+        });
+      });
+    setFormValues({
+      ...formValues,
+      [name]: value
+    });
   };
 
   const formSubmit = () => {
-
+    const newUser = {
+      name: formValues.name.trim(),
+      email: formValues.email.trim(),
+      password: formValues.password.trim(),
+      key: Math.random()
+    };
+    postNewUser(newUser);
   };
+
+  useEffect(() => {
+    schema.isValid(formValues).then((valid) => {
+      setDisabled(!valid);
+    });
+  }, [formValues]);
 
   return (
     <div className="container">
@@ -64,7 +101,7 @@ export default function App() {
       />
 
       {users.map((user) => {
-        return <User key={user.id} details={user}/>
+        return <User key={user.key} details={user}/>
       })}
     </div>
   );

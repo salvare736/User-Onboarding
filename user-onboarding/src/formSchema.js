@@ -8,5 +8,9 @@ export default yup.object().shape({
     .string()
     .email("must be a valid email")
     .required("email is required"),
+  password: yup
+    .string()
+    .required("password is required")
+    .min(8, "password must be 8 chars long"),
   tos: yup.boolean()
 });

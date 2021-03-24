@@ -4,11 +4,14 @@ export default function Form(props) {
   const { values, submit, change, disabled, errors } = props;
 
   const onSubmit = (evt) => {
-
+    evt.preventDefault();
+    submit();
   };
 
   const onChange = (evt) => {
-
+    const { name, value, type, checked } = evt.target;
+    const valueToUse = type === 'checkbox' ? checked : value;
+    change(name, valueToUse);
   };
 
   return (
@@ -54,7 +57,7 @@ export default function Form(props) {
           <input
             value={values.password}
             onChange={onChange}
-            name="name"
+            name="password"
             type="password"
           />
         </label>
@@ -64,7 +67,7 @@ export default function Form(props) {
         <h4>Terms of Service</h4>
 
         <label>
-          Please check here:
+          Check to agree:
           <input
             type="checkbox"
             name="tos"
