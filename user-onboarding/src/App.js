@@ -11,7 +11,6 @@ const initialFormValues = {
   email: '',
   password: '',
   tos: false,
-  key: ''
 };
 
 const initialFormErrors = {
@@ -22,7 +21,7 @@ const initialFormErrors = {
 };
 
 const initialUsers = [
-  {name: 'Sergio Alvarez', email: 'sa@gmail.com', password: 'sa9001julyruby', key:'.123456789'}
+  {name: 'Sergio Alvarez', email: 'sa@gmail.com', password: 'sa9001julyruby', key: 0.12345678912345678}
 ];
 
 const initialDisabled = true;
