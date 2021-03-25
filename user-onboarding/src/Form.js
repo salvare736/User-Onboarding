@@ -22,10 +22,10 @@ export default function Form(props) {
         <button id="submitButton" disabled={disabled}>submit</button>
 
         <div className="errors">
-          <div>{errors.name}</div>
-          <div>{errors.email}</div>
-          <div>{errors.password}</div>
-          <div>{errors.tos}</div>
+          <div id="nameErrors">{errors.name}</div>
+          <div id="emailErrors">{errors.email}</div>
+          <div id="passwordErrors">{errors.password}</div>
+          <div id="tosErrors">{errors.tos}</div>
         </div>
       </div>
 
